@@ -29,6 +29,15 @@ Coming eventually...
 Requires a virtual Vyper env to be set up exactly as described in the [Vyper tutorial](https://vyper.readthedocs.io/en/latest/installing-vyper.html).
 This means that the folder `~/vyper-venv/bin` should contain a `python` and a `vyper` executable.
 
+## Installation
+
+This extension is not published (and maybe never will).
+
+To manually install it:
+
+1. Download the `vscode-vyper-0.0.x.vsix` from the root of this repo
+2. Inside VS Code: Call the `Extensions: Install from VSIX...` command via the command palette (`Ctrl+Shift+P`)
+3. Select the downloaded file. And you're ready to go!
 
 ## Development
 
