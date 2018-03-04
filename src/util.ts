@@ -173,9 +173,7 @@ export function handleDiagnosticErrors(document: vscode.TextDocument, errors: IC
 		if (document && document.uri.toString() === canonicalFile) {
 			let range = new vscode.Range(error.line - 1, 0, error.line - 1, document.lineAt(error.line - 1).range.end.character + 1);
 			let text = document.getText(range);
-			let [_, leading, trailing] = /^(\s*).*(\s*)$/.exec(text);
-			startColumn = leading.length;
-			endColumn = text.length - trailing.length;
+			endColumn = text.length;
 		}
 		let range = new vscode.Range(error.line - 1, startColumn, error.line - 1, endColumn);
 		let severity = mapSeverityToVSCodeSeverity(error.severity);
