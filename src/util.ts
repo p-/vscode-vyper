@@ -60,6 +60,7 @@ export function runTool(args: string[], cwd: string, severity: string, useStdErr
 					if (!lines[i].startsWith('vyper.')
 						&& !lines[i].startsWith('tokenize.')
 						&& !lines[i].startsWith('SyntaxError:')
+						&& !lines[i].startsWith('AttributeError:')
 						&& !lines[i].startsWith('Exception:')) {
 						if (printUnexpectedOutput && useStdErr && stderr)
 						{
@@ -78,7 +79,7 @@ export function runTool(args: string[], cwd: string, severity: string, useStdErr
 						checkResult = pythonErrorLineToCheckResult(lines[i], file, severity);
 					} else if (lines[i].startsWith('SyntaxError:')) {
 						checkResult = syntaxErrorToCheckResult(lines, i, file, severity);
-					} else if (lines[i].startsWith('Exception:')) {
+					} else if (lines[i].startsWith('Exception:') || lines[i].startsWith('AttributeError:')) {
 						checkResult = exceptionErrorLineToCheckResult(lines[i], file, severity);
 					}
 
