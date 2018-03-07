@@ -36,6 +36,8 @@ To manually install it:
 2. Inside VS Code: Call the `Extensions: Install from VSIX...` command via the command palette (`Ctrl+Shift+P`)
 3. Select the downloaded file. And you're ready to go!
 
+![Install VSIX](vscode-install-vsix.png)
+
 ## Development
 
 You're gladely invited to help with the development of this extension!
