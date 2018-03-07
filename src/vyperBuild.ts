@@ -1,6 +1,6 @@
 import path = require('path');
 import vscode = require('vscode');
-import { runTool, ICheckResult, handleDiagnosticErrors, getWorkspaceFolderPath, getVyperDefaultVirtualEnv } from './util';
+import { runTool, ICheckResult, handleDiagnosticErrors, getVyperVirtualEnv } from './util';
 import { outputChannel } from './vyperStatus';
 import { diagnosticsStatusBarItem } from './vyperStatus';
 
@@ -45,8 +45,7 @@ export function vyperBuild(fileUri: vscode.Uri, vyperConfig: vscode.WorkspaceCon
 	}
 
 	// Calls Vyper with virtual env: /Users/sectests/vyper-venv/bin/python /usr/local/bin/vyper (which vyper?)
-	const currentWorkspace = getWorkspaceFolderPath(fileUri);
-	const cwd = currentWorkspace ? currentWorkspace : path.dirname(fileUri.fsPath);
+	const cwd = path.dirname(fileUri.fsPath);
 	if (!path.isAbsolute(cwd)) {
 		return Promise.resolve([]);
 	}
@@ -54,8 +53,8 @@ export function vyperBuild(fileUri: vscode.Uri, vyperConfig: vscode.WorkspaceCon
 	running = true;
 
 	//TODO get Env and Vyper Exec from config if configured
-	const pythonFromVirtualEnv = getVyperDefaultVirtualEnv() + '/bin/python';
-	const vyperExec = getVyperDefaultVirtualEnv() + '/bin/vyper';
+	const pythonFromVirtualEnv = getVyperVirtualEnv() + '/bin/python';
+	const vyperExec = getVyperVirtualEnv() + '/bin/vyper';
 
 	const index = fileUri.path.lastIndexOf("/") + 1;
 	const fileName = fileUri.path.substr(index);

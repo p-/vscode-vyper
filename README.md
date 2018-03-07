@@ -22,12 +22,9 @@ This means that the folder `~/vyper-venv/bin` should contain a `python` and a `v
 
 ## Extension Settings
 
-Coming eventually...
+The path to the virtual Python environment can be set in the User Settings (`Ctrl+Shift+P`) + 'Open User Settings' via the `vyper.virtualEnvPath` variable.
 
-## Known Issues
-
-Requires a virtual Vyper env to be set up exactly as described in the [Vyper tutorial](https://vyper.readthedocs.io/en/latest/installing-vyper.html).
-This means that the folder `~/vyper-venv/bin` should contain a `python` and a `vyper` executable.
+![VS Code User Settings](vscode-vyper-settings.png)
 
 ## Installation
 

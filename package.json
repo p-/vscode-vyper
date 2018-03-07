@@ -2,7 +2,7 @@
     "name": "vscode-vyper",
     "displayName": "Vyper",
     "description": "Vyper (Ethereum) support for VS Code",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "p-",
     "keywords": [
         "vyper",
@@ -51,7 +51,22 @@
                 "scopeName": "source.vyper",
                 "path": "./syntax/MagicPython.tmLanguage.json"
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Vyper configuration",
+            "properties": {
+                "vyper.virtualEnvPath": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "default": null,
+                    "description": "Specifies the Virtual Python Environment to use.",
+                    "scope": "resource"
+                  }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",

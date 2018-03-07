@@ -226,24 +226,25 @@ function mapSeverityToVSCodeSeverity(sev: string): vscode.DiagnosticSeverity {
 	}
 }
 
-export function getWorkspaceFolderPath(fileUri: vscode.Uri): string {
-	if (fileUri) {
-		let workspace = vscode.workspace.getWorkspaceFolder(fileUri);
-		if (workspace) {
-			return workspace.uri.fsPath;
-		}
-	}
+export function getVyperVirtualEnv(): string {
+	const vyperConfig = vscode.workspace.getConfiguration('vyper', vscode.window.activeTextEditor ? vscode.window.activeTextEditor.document.uri : null);
 
-	// fall back to the first workspace
-	let folders = vscode.workspace.workspaceFolders;
-	if (folders && folders.length) {
-		return folders[0].uri.fsPath;
+	if (vyperConfig['virtualEnvPath'] !== null) {
+		return resolveHomeDir(vyperConfig['virtualEnvPath']);
 	}
-}
-
-export function getVyperDefaultVirtualEnv(): string {
 	return os.homedir() + '/vyper-venv';
 }
+
+/**
+ * Expands ~ to homedir in non-Windows platform
+ */
+export function resolveHomeDir(inputPath: string): string {
+	if (!inputPath || !inputPath.trim()) {
+		return inputPath;
+	} 
+	return inputPath.startsWith('~') ? path.join(os.homedir(), inputPath.substr(1)) : inputPath;
+}
+
 
 export function killTree(processId: number): void {
 	if (process.platform === 'win32') {
