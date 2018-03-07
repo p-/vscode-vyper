@@ -44,7 +44,6 @@ export function vyperBuild(fileUri: vscode.Uri, vyperConfig: vscode.WorkspaceCon
 		tokenSource.cancel();
 	}
 
-	// Calls Vyper with virtual env: /Users/sectests/vyper-venv/bin/python /usr/local/bin/vyper (which vyper?)
 	const cwd = path.dirname(fileUri.fsPath);
 	if (!path.isAbsolute(cwd)) {
 		return Promise.resolve([]);
@@ -52,7 +51,6 @@ export function vyperBuild(fileUri: vscode.Uri, vyperConfig: vscode.WorkspaceCon
 
 	running = true;
 
-	//TODO get Env and Vyper Exec from config if configured
 	const pythonFromVirtualEnv = getVyperVirtualEnv() + '/bin/python';
 	const vyperExec = getVyperVirtualEnv() + '/bin/vyper';
 

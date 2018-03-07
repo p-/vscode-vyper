@@ -37,9 +37,8 @@ export function runTool(args: string[], cwd: string, severity: string, useStdErr
 		p = cp.execFile(cmd, args, { env: env, cwd: cwd }, (err, stdout, stderr) => {
 			try {
 				if (err && (<any>err).code === 'ENOENT') {
-					// Since the tool is run on save which can be frequent
-					// we avoid sending explicit notification if tool is missing
-					console.log(`Cannot find ${toolName}`);
+					console.log(`Cannot find Python to execute Vyper: ${toolName}`);
+					vscode.window.showErrorMessage(`Cannot find Python to execute Vyper: ${toolName}. Please specify a virtual environment in the user settings.`);
 					return resolve([]);
 				}
 				if (err && stderr && !useStdErr) {
