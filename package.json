@@ -2,7 +2,7 @@
     "name": "vscode-vyper",
     "displayName": "Vyper",
     "description": "Vyper (Ethereum) support for VS Code",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "p-",
     "keywords": [
         "vyper",

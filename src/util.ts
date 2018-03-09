@@ -106,21 +106,24 @@ export function runTool(args: string[], cwd: string, severity: string, useStdErr
 	});
 }
 
-function vyperErrorLineToCheckResult(errorLine: string, file: string, defaultSeverity: string): ICheckResult {
-	//Sample: vyper.exceptions.InvalidTypeException: line 10: Invalid base type: int18
+export function vyperErrorLineToCheckResult(errorLine: string, file: string, defaultSeverity: string): ICheckResult {
 	//TODO error handling
-	//TODO test
 	const errorParts = errorLine.split(':');
-	const line = parseInt(errorParts[1].trim().split(' ')[1]);
-	const msg = errorParts.slice(2, errorParts.length).join(':').trim();
+
+	let line = 1;
+	let startSlice = 1;
+	if (errorParts.length === 4)
+	{
+		line = parseInt(errorParts[1].trim().split(' ')[1]);
+		startSlice = 2;
+	}
+	const msg = errorParts.slice(startSlice, errorParts.length).join(':').trim();
 
 	return { file, line, msg, severity: defaultSeverity };
 }
 
-function pythonErrorLineToCheckResult(errorLine: string, file: string, defaultSeverity: string): ICheckResult {
-	// Sample: tokenize.TokenError: ('EOF in multi-line statement', (49, 0))
+export function pythonErrorLineToCheckResult(errorLine: string, file: string, defaultSeverity: string): ICheckResult {
 	//TODO error handling
-	//TODO test
 	const errorParts = errorLine.split(':');
 	const freedMessage = errorParts[1].trim().replace(/\(/g, '').replace(/'/g, '');
 	const messageParts = freedMessage.split(',');
@@ -131,7 +134,7 @@ function pythonErrorLineToCheckResult(errorLine: string, file: string, defaultSe
 	return { file, line, msg, severity: defaultSeverity };
 }
 
-function syntaxErrorToCheckResult(errorLines: string[], errorLineNumber: number, file: string, defaultSeverity: string): ICheckResult {
+export function syntaxErrorToCheckResult(errorLines: string[], errorLineNumber: number, file: string, defaultSeverity: string): ICheckResult {
 	// Sample:
 	// 	File "<unknown>", line 24
 	//     def participate:
@@ -145,10 +148,8 @@ function syntaxErrorToCheckResult(errorLines: string[], errorLineNumber: number,
 	return { file, line, msg, severity: defaultSeverity };
 }
 
-function exceptionErrorLineToCheckResult(errorLine: string, file: string, defaultSeverity: string): ICheckResult {
-	//Sample: Exception: Unsupported keyword: block.timetamp
+export function exceptionErrorLineToCheckResult(errorLine: string, file: string, defaultSeverity: string): ICheckResult {
 	//TODO error handling
-	//TODO test
 	const errorParts = errorLine.split(':');
 	const line = 1;
 	const msg = errorParts.slice(1, errorParts.length).join(':').trim();
