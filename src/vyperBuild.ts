@@ -3,21 +3,13 @@ import vscode = require('vscode');
 import { runTool, ICheckResult, handleDiagnosticErrors, getVyperVirtualEnv } from './util';
 import { outputChannel } from './vyperStatus';
 import { diagnosticsStatusBarItem } from './vyperStatus';
+import { VYPER_LANG_ID, VYPER_CONFIG_SECTION } from './vyperMain';
 
-export function buildContract() {
+export function buildContract(vyperFileUri?: vscode.Uri) {
+	const documentUri = vyperFileUri ? vyperFileUri : getActiveTextEditorUri();
+	let vyperConfig = vscode.workspace.getConfiguration(VYPER_CONFIG_SECTION, documentUri);
+
 	let editor = vscode.window.activeTextEditor;
-	if (!editor) {
-		vscode.window.showInformationMessage('No editor is active, cannot find current file to build');
-		return;
-	}
-	if (editor.document.languageId !== 'vyper') {
-		vscode.window.showInformationMessage('File in the active editor is not a Vyper file.');
-		return;
-	}
-
-	let documentUri = editor ? editor.document.uri : null;
-	let vyperConfig = vscode.workspace.getConfiguration('vyper', documentUri);
-
 	outputChannel.clear(); // Ensures stale output from build on save is cleared
 	diagnosticsStatusBarItem.show();
 	diagnosticsStatusBarItem.text = 'Building...';
@@ -31,6 +23,20 @@ export function buildContract() {
 			vscode.window.showInformationMessage('Error: ' + err);
 			diagnosticsStatusBarItem.text = 'Building Failed';
 		});
+}
+
+function getActiveTextEditorUri(): vscode.Uri {
+	let editor = vscode.window.activeTextEditor;
+	if (!editor) {
+		vscode.window.showInformationMessage('No editor is active, cannot find current file to build');
+		return null;
+	}
+	if (editor.document.languageId !== VYPER_LANG_ID) {
+		vscode.window.showInformationMessage('File in the active editor is not a Vyper file.');
+		return null;
+	}
+
+	return editor ? editor.document.uri : null;
 }
 
 /**

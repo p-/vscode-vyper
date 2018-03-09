@@ -4,11 +4,13 @@ import * as vscode from 'vscode';
 import { buildContract } from './vyperBuild';
 import { languages, IndentAction } from 'vscode';
 
+export const VYPER_LANG_ID = 'vyper';
+export const VYPER_CONFIG_SECTION = 'vyper';
 export let errorDiagnosticCollection: vscode.DiagnosticCollection;
 export let warningDiagnosticCollection: vscode.DiagnosticCollection;
 
 export function activate(context: vscode.ExtensionContext) {
-	languages.setLanguageConfiguration('vyper', {
+	languages.setLanguageConfiguration(VYPER_LANG_ID, {
 		onEnterRules: [
 			{
 				beforeText: /^\s*(?:def|class|for|if|elif|else|while|try|with|finally|except|async).*?:\s*$/,
@@ -23,7 +25,18 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(warningDiagnosticCollection);
 
     let disposable = vscode.commands.registerCommand('vyper.buildContract',buildContract);
-    context.subscriptions.push(disposable);
+	context.subscriptions.push(disposable);
+	
+	startBuildOnSaveWatcher(context.subscriptions);
+}
+
+function startBuildOnSaveWatcher(subscriptions: vscode.Disposable[]) {
+	vscode.workspace.onDidSaveTextDocument(document => {
+		if (document.languageId !== VYPER_LANG_ID) {
+			return;
+		}
+		buildContract(document.uri);
+	}, null, subscriptions);
 }
 
 export function deactivate() {

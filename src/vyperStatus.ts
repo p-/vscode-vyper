@@ -1,6 +1,7 @@
 'use strict';
 
 import vscode = require('vscode');
+import { VYPER_LANG_ID } from './vyperMain';
 
 export let outputChannel = vscode.window.createOutputChannel('Vyper');
 
@@ -8,7 +9,7 @@ export let diagnosticsStatusBarItem = vscode.window.createStatusBarItem(vscode.S
 
 let statusBarEntry: vscode.StatusBarItem;
 
-export const VYPER_MODE: vscode.DocumentFilter = { language: 'vyper', scheme: 'file' };
+export const VYPER_MODE: vscode.DocumentFilter = { language: VYPER_LANG_ID, scheme: 'file' };
 
 export function showHideStatus() {
 	if (!statusBarEntry) {

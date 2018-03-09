@@ -2,7 +2,7 @@ import vscode = require('vscode');
 import path = require('path');
 import cp = require('child_process');
 import { outputChannel } from './vyperStatus';
-import { errorDiagnosticCollection, warningDiagnosticCollection } from './vyperMain';
+import { errorDiagnosticCollection, warningDiagnosticCollection, VYPER_CONFIG_SECTION } from './vyperMain';
 import * as os from 'os';
 
 export interface ICheckResult {
@@ -228,7 +228,7 @@ function mapSeverityToVSCodeSeverity(sev: string): vscode.DiagnosticSeverity {
 }
 
 export function getVyperVirtualEnv(): string {
-	const vyperConfig = vscode.workspace.getConfiguration('vyper', vscode.window.activeTextEditor ? vscode.window.activeTextEditor.document.uri : null);
+	const vyperConfig = vscode.workspace.getConfiguration(VYPER_CONFIG_SECTION, vscode.window.activeTextEditor ? vscode.window.activeTextEditor.document.uri : null);
 
 	if (vyperConfig['virtualEnvPath'] !== null) {
 		return resolveHomeDir(vyperConfig['virtualEnvPath']);
