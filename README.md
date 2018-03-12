@@ -34,7 +34,7 @@ This extension is not published (and maybe never will).
 
 To manually install it:
 
-1. Download the `vscode-vyper-0.0.x.vsix` from the root of this repo
+1. Download the `vscode-vyper-0.0.x.vsix` from the [releases](https://github.com/p-/vscode-vyper)
 2. Inside VS Code: Call the `Extensions: Install from VSIX...` command via the command palette (`Ctrl+Shift+P`)
 3. Select the downloaded file. And you're ready to go!
 
