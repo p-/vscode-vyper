@@ -3,6 +3,7 @@ All notable changes to the "vscode-vyper" extension will be documented in this f
 
 ## 0.0.3
 - Added 'Build on Save'
+- Added Property to disable 'Build on Save'
 - Syntax coloring for Vyper specific types
 
 ## 0.0.2

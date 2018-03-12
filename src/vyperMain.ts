@@ -35,6 +35,10 @@ function startBuildOnSaveWatcher(subscriptions: vscode.Disposable[]) {
 		if (document.languageId !== VYPER_LANG_ID) {
 			return;
 		}
+		const vyperConfig = vscode.workspace.getConfiguration(VYPER_CONFIG_SECTION);
+		if (vyperConfig['buildOnSave'] === false) {
+			return;
+		}
 		buildContract(document.uri);
 	}, null, subscriptions);
 }

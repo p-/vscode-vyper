@@ -64,7 +64,13 @@
                     "default": null,
                     "description": "Specifies the Virtual Python Environment to use.",
                     "scope": "resource"
-                  }
+                },
+                "vyper.buildOnSave": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Run Vyper build on save for current file. It is advised to set this to `false` when you have Auto Save enabled.",
+                    "scope": "resource"
+                }
             }
         }
     },

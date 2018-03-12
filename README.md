@@ -1,15 +1,16 @@
-# vscode-vyper alpha
+# Vyper for VS Code (alpha)
 
-This extension brings the [Vyper](https://github.com/ethereum/vyper) smart contract language for Ethereum to Visual Studio Code. Like Vyper itself (and even more so) this extension is alpha software and should just be used to toy around with vyper. Compatibility with later versions cannot be guaranteed. 
+This extension brings the [Vyper](https://github.com/ethereum/vyper) smart contract language for Ethereum to Visual Studio Code (a mix between editor and IDE). Like Vyper itself (and even more so) this extension is alpha software and should just be used to toy around with vyper. Compatibility with later versions cannot be guaranteed. 
 
-In it's current state this extension is just the result of hacking the [Python highlighting support](https://github.com/Microsoft/vscode/tree/master/extensions/python) together with the ability to call command line tools from the [Go extension](https://github.com/Microsoft/vscode-go).
+This extension is basically the result of hacking the [Python highlighting support](https://github.com/Microsoft/vscode/tree/master/extensions/python) together with the ability to call command line tools from the [Go extension](https://github.com/Microsoft/vscode-go) and displaying the results of the StdError in a user-friendly way.
 
 ## Features
 
 * Provides the `Vyper: Build Contract` command that when called on a saved file shows the actual build errors.
-* Syntax Higlighting for Vyper (*.vy, *.v.py) files.
+* Syntax Higlighting for Vyper (*.vy, *.v.py) files inclusive Vyper specific types like `int128`.
+* Build on Save
 
-This is how it could look like if Vyper is installed as required:
+Vyper for VS Code in action:
 
 ![Build Contract](vscode-vyper.gif)
 
@@ -26,6 +27,7 @@ The path to the virtual Python environment can be set in the User Settings (`Ctr
 
 ![VS Code User Settings](vscode-vyper-settings.png)
 
+The 'Build on Save' feature can be disabled with the `vyper.buildOnSave` setting property.
 ## Installation
 
 This extension is not published (and maybe never will).
