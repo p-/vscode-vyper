@@ -49,7 +49,7 @@
             {
                 "language": "vyper",
                 "scopeName": "source.vyper",
-                "path": "./syntax/MagicPython.tmLanguage.json"
+                "path": "./syntax/MagicVyper.tmLanguage.json"
             }
         ],
         "configuration": {

@@ -1,6 +1,7 @@
 {
 	"information_for_contributors": [
-		"This file has been converted from https://github.com/MagicStack/MagicPython/blob/master/grammars/MagicPython.tmLanguage"
+		"This file has been converted from https://github.com/MagicStack/MagicPython/blob/master/grammars/MagicPython.tmLanguage",
+		"Extended with types for Vyper"
 	],
 	"version": "https://github.com/MagicStack/MagicPython/commit/b453f26ed856c9b16a053517c41207e3a72cc7d5",
 	"name": "MagicVyper",
@@ -1617,7 +1618,7 @@
 		},
 		"builtin-types": {
 			"name": "support.type.python",
-			"match": "(?x)\n  (?<!\\.) \\b(\n    bool | bytearray | bytes | classmethod | complex | dict\n    | float | frozenset | int | list | object | property\n    | set | slice | staticmethod | str | tuple | type\n\n    (?# Although 'super' is not a type, it's related to types,\n        and is special enough to be highlighted differently from\n        other built-ins)\n    | super\n  )\\b\n"
+			"match": "(?x)\n  (?<!\\.) \\b(\n    int128 | uint256 | decimal | bytes32 | address | timestamp | timedelta | wei_value | bool | bytearray | bytes | classmethod | complex | dict\n    | float | frozenset | int | list | object | property\n    | set | slice | staticmethod | str | tuple | type\n\n    (?# Although 'super' is not a type, it's related to types,\n        and is special enough to be highlighted differently from\n        other built-ins)\n    | super\n  )\\b\n"
 		},
 		"magic-function-names": {
 			"comment": "these methods have magic interpretation by python and are generally called\nindirectly through syntactic constructs\n",
